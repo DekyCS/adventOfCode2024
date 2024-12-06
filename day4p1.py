@@ -62,8 +62,8 @@ for row in range(len(xmas)):
     for col in range(len(xmas[row])):
         try:
             print(f"({row},{col})")
-            if xmas[row][col] == "X":
-                print(f"Check for 1 ({row},{col}) = X Verify: {xmas[row][col]}")
+            if xmas[row][col] == "M":
+                print(f"Check for 1 ({row},{col}) = M Verify: {xmas[row][col]}")
                 #Check for "M" on top
                 print("Check top")
                 if isInRange(row - 1, col):
