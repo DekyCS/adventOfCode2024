@@ -4,7 +4,7 @@ leftSide = []
 rightSide = []
 similarityScore = 0
 
-f = open("input.txt", "r")
+f = open("input/input.txt", "r")
 for x in f:
   left, right = x.split("   ")
   leftSide.append(int(left))

@@ -1,7 +1,7 @@
 safeReport = 0
 reports = []
 
-f = open("reports.txt", "r")
+f = open("input/reports.txt", "r")
 for x in f:
   reports.append(x.split(" "))
 

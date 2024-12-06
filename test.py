@@ -1,7 +1,7 @@
-hello = [(1,2),(1,3),(1,4)]
+import math
 
-hello.append((1,4))
-hello.append((1,4))
+hello = [1,2,3,4,5]
 
-for r in hello:
-    print(r)
+print(math.ceil(len(hello)/2))
+
+print(round(2.5))

@@ -1,4 +1,4 @@
-f =  open("xmas.txt", "r")
+f =  open("input/xmas.txt", "r")
 
 xmas = []
 

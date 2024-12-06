@@ -1,6 +1,6 @@
 from numpy.linalg.linalg import solve
 
-f =  open("xmas.txt", "r")
+f =  open("input/xmas.txt", "r")
 
 xmas = []
 mDoNotUse = []

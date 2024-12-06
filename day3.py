@@ -7,7 +7,7 @@ finalSum = 0
 
 input = ""
 
-f = open("multiply.txt", "r")
+f = open("input/multiply.txt", "r")
 for x in f:
   input += x
 
