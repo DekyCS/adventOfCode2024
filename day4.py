@@ -1,4 +1,4 @@
-f =  open("xmas3.txt", "r")
+f =  open("xmas.txt", "r")
 
 xmas = []
 
@@ -11,10 +11,14 @@ for x in f:
         temp.append(x[i])
     xmas.append(temp)
 
-def isNotNegative(num):
-    if num >= 0:
-        return True
-    return False
+def isInRange(row,col):
+    print(f"Hello: ({row},{col})")
+    if row < 0 or row >= len(xmas):
+        return False
+    if col < 0 or col >= len(xmas[row]):
+        print("was not working")
+        return False
+    return True
 
 def checkTheRest(row, col, type):
     rowAdd = 0
@@ -44,64 +48,81 @@ def checkTheRest(row, col, type):
             print(type)
             return False
     for index in range(len(theRest)): #theRest is "AS"
-        if isNotNegative(row + (rowAdd * (index + 1))) and isNotNegative(col + (colAdd * (index + 1))):
+        if isInRange(row + (rowAdd * (index + 1)), col + (colAdd * (index + 1))):
             if xmas[row + (rowAdd * (index + 1))][col + (colAdd * (index + 1))] != theRest[index]:
                 print("fails")
                 return False
             print(f"Check for {index + 3} ({row + (rowAdd * (index + 1))},{col + (colAdd * (index + 1))}) = {theRest[index]} Verify: {xmas[row + (rowAdd * (index + 1))][col + (colAdd * (index + 1))]}")
+        else:
+            print("fails")
+            return False
     print("works")
     return True
 for row in range(len(xmas)):
-    try:
-        for col in range(len(xmas[row])):
+    for col in range(len(xmas[row])):
+        try:
+            print(f"({row},{col})")
             if xmas[row][col] == "X":
                 print(f"Check for 1 ({row},{col}) = X Verify: {xmas[row][col]}")
                 #Check for "M" on top
-                if isNotNegative(row-1):
+                print("Check top")
+                if isInRange(row - 1, col):
                     if xmas[row-1][col] == "M":
                         print(f"Check for 2 ({row-1},{col}) = M Verify: {xmas[row-1][col]}")
                         if checkTheRest(row-1, col, "top"):
                             countOfXmas += 1
                 # Check for "M" on bottom
-                if xmas[row + 1][col] == "M":
-                    print(f"Check for 2 ({row + 1},{col}) = M Verify: {xmas[row + 1][col]}")
-                    if checkTheRest(row+1, col, "bottom"):
-                        countOfXmas += 1
+                print("Check bottom")
+                if isInRange(row+1, col):
+                    if xmas[row + 1][col] == "M":
+                        print(f"Check for 2 ({row + 1},{col}) = M Verify: {xmas[row + 1][col]}")
+                        if checkTheRest(row+1, col, "bottom"):
+                            countOfXmas += 1
                 # Check for "M" on left
-                if isNotNegative(col-1):
+                print("Check left")
+                if isInRange(row, col - 1):
                     if xmas[row][col-1] == "M":
                         print(f"Check for 2 ({row},{col - 1}) = M Verify: {xmas[row][col-1]}")
                         if checkTheRest(row, col-1, "left"):
                             countOfXmas += 1
                 # Check for "M" on right
-                if xmas[row][col + 1] == "M":
-                    print(f"Check for 2 ({row},{col+1}) = M Verify: {xmas[row][col+1]}")
-                    if checkTheRest(row, col+1, "right"):
-                        countOfXmas += 1
+                print(f"Check right ({row},{col+1})")
+                if isInRange(row, col+1):
+                    print(f"({row},{col}) is in range")
+                    if xmas[row][col + 1] == "M":
+                        print(f"Check for 2 ({row},{col+1}) = M Verify: {xmas[row][col+1]}")
+                        if checkTheRest(row, col+1, "right"):
+                            countOfXmas += 1
                 # Check for "M" on top left
-                if isNotNegative(row-1) and isNotNegative(col-1):
+                print("Check top left")
+                if isInRange(row - 1, col-1):
                     if xmas[row - 1][col - 1] == "M":
                         print(f"Check for 2 ({row - 1},{col-1}) = M Verify: {xmas[row - 1][col-1]}")
                         if checkTheRest(row-1, col-1, "top left"):
                             countOfXmas += 1
                 # Check for "M" on top right
-                if isNotNegative(row-1):
+                print("Check top right")
+                if isInRange(row - 1, col+1):
                     if xmas[row - 1][col + 1] == "M":
                         print(f"Check for 2 ({row - 1},{col+1}) = M Verify: {xmas[row - 1][col+1]}")
                         if checkTheRest(row-1, col+1, "top right"):
                             countOfXmas += 1
                 # Check for "M" on bottom left
-                if isNotNegative(col - 1):
+                print("Check bottom left")
+                if isInRange(row+1,col - 1):
                     if xmas[row + 1][col - 1] == "M":
                         print(f"Check for 2 ({row + 1},{col-1}) = M Verify: {xmas[row+1][col-1]}")
                         if checkTheRest(row+1, col-1, "bottom left"):
                             countOfXmas += 1
                 # Check for "M" on bottom right
-                print(f"Check for 2 ({row+1},{col+1}) = M Verify: {xmas[row+1][col+1]}")
-                if xmas[row + 1][col + 1] == "M":
-                    if checkTheRest(row+1, col+1, "bottom right"):
-                        countOfXmas += 1
-    except:
-        pass
+                print("Check bottom right")
+                if isInRange(row+1, col+1):
+                    if xmas[row + 1][col + 1] == "M":
+                        print(f"Check for 2 ({row + 1},{col + 1}) = M Verify: {xmas[row + 1][col + 1]}")
+                        if checkTheRest(row+1, col+1, "bottom right"):
+                            countOfXmas += 1
+        except Exception as error:
+            print(f"Error: ({row},{col}) || {error}")
+            pass
 
 print(countOfXmas)

@@ -1,3 +1,4 @@
 hello = [1,2,3]
 
-print(hello[-1])
+for i in range(len(hello)):
+    print(hello[i])
